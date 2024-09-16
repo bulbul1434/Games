@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Rock Paper Scissors</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-indigo-300">
+	<div class="game-container  border-blue-800 bg-transparent max-w-md mx-auto text-center
+	 rounded-lg shadow-2xl border-2 p-16 mt-20">
+		<h1 class="text-3xl font-semibold mb-7 underline">
+			Rock Paper Scissors
+		</h1>
+		<div class="button-container ">
+			<button class="btn bg-blue-500 text-white 
+						font-semibold px-4 py-2 rounded mr-2" id="rock">
+				Rock
+			</button>
+			<button class="btn bg-blue-500 text-white 
+						font-semibold px-4 py-2 rounded mr-2" id="paper">
+				Paper
+			</button>
+			<button class="btn bg-blue-500 text-white 
+						font-semibold px-4 py-2 rounded" id="scissors">
+				Scissors
+			</button>
+		</div>
+		<div class="result-container  flex flex-col justify-center mt-10">
+			<p class="font-semibold ">
+				Your Choice:- <span id="playerChoice"></span>
+			</p>
+			<p class="font-semibold">
+				Computer's Choice:- <span id="computerChoice"></span>
+			</p>
+			<p class="font-semibold">
+				Your Score:- <span id="playerScore">0</span>
+			</p>
+			<p class="font-semibold">
+				Computer Score:- <span id="computerScore">0</span>
+			</p>
+			<p class="result-text" id="result"></p>
+		</div>
+	</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
