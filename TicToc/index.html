@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tic Toc Toe</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f0f3f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        #container {
+            text-align: center;
+        }
+
+        .btn {
+            height: 80px;
+            width: 80px;
+            margin: 8px;
+            border: 2px solid #d4d7d9; 
+            border-radius: 10px;
+            opacity: 0.8;
+            box-shadow: -3px 5px 15px 0px rgba(0, 0, 0, 0.1); 
+            font-size: 50px;
+            text-shadow: 2px 1px 13px rgba(255, 255, 255, 0.5); /* Soft White */
+            background-color: #e0f2f1; /* Cool Aquamarine */
+            cursor: pointer;
+            outline: none;
+        }
+
+        #ttt {
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            justify-content: center;
+        }
+
+        #reset {
+            width: 150px;
+            height: 40px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 20px;
+            background-color: #ff7b54; /* Bright Orange */
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        h2 {
+            color: #27496d; /* Deep Blue */
+            text-shadow: 0px 5px 4px rgba(255, 255, 255, 0.5); /* Soft Shadow */
+        }
+
+        #winnerModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #winnerModalContent {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+        #closeModal{
+            float: right;
+            margin-top: 20px;
+        }
+        
+    </style>
+</head>
+<body>
+<div id="container">
+    <div id="ttt">
+        <button class="btn"></button>
+        <button class="btn"></button>
+        <button class="btn"></button>
+        <button class="btn"></button>
+        <button class="btn"></button>
+        <button class="btn"></button>
+        <button class="btn"></button>
+        <button class="btn"></button>
+        <button class="btn"></button>
+    </div>
+    <button id="reset">Reset Game</button>
+</div>
+
+<div id="winnerModal">
+    <div id="winnerModalContent">
+        <div id="winnerMessage"></div>
+        <button id="closeModal">Close</button>
+    </div>
+</div>
+
+<script>
+    let resetBtn = document.querySelector('#reset');
+    let boxes = document.querySelectorAll('.btn');
+    let turnO = true;
+    let gameFinished = false;
+
+    const winningCombos = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], // horizontal
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], // vertical
+        [0, 4, 8], [2, 4, 6] // diagonal
+    ];
+
+    boxes.forEach((box, index) => {
+        box.addEventListener('click', () => {
+            if (!gameFinished && box.innerText === '') {
+                if (turnO) {
+                    box.innerText = 'X';
+                } else {
+                    box.innerText = 'O';
+                }
+                turnO = !turnO;
+                checkWinner();
+            }
+        });
+    });
+
+    function checkWinner() {
+        for (let combo of winningCombos) {
+            const [a, b, c] = combo;
+            if (
+                boxes[a].innerText &&
+                boxes[a].innerText === boxes[b].innerText &&
+                boxes[a].innerText === boxes[c].innerText
+            ) {
+                announceWinner(boxes[a].innerText);
+                return;
+            }
+        }
+        if ([...boxes].every(box => box.innerText !== '')) {
+            announceWinner('Draw');
+        }
+    }
+
+    function announceWinner(winner) {
+        gameFinished = true;
+        const winnerMessage = document.querySelector('#winnerMessage');
+        const winnerModal = document.querySelector('#winnerModal');
+        if (winner === 'Draw') {
+            winnerMessage.innerText = 'It\'s a Draw!';
+        } else {
+            winnerMessage.innerText = winner + ' is Wins..!🤩🥳🤗';
+        }
+        winnerModal.style.display = 'flex';
+    }
+
+    resetBtn.addEventListener('click', () => {
+        boxes.forEach(box => {
+            box.innerText = '';
+        });
+        gameFinished = false;
+        document.querySelector('#winnerModal').style.display = 'none';
+    });
+
+    document.querySelector('#closeModal').addEventListener('click', () => {
+        document.querySelector('#winnerModal').style.display = 'none';
+    });
+</script>
+</body>
+</html>

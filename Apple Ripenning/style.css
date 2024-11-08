@@ -1,0 +1,17 @@
+div {
+    filter: hue-rotate(80deg);
+    font-size: 66px;
+    text-align: center;
+    margin-top: 150px;
+}
+
+p {
+    text-align: center;
+    padding: 1em;
+}
+
+.autumn {
+    filter: hue-rotate(0deg);
+    scale: 1.5;
+    Transition: 5000ms;
+}
