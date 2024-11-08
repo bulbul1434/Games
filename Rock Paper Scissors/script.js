@@ -31,6 +31,7 @@ function playRound(playerChoice, computerChoice) {
     ) {
         playerScore++;
         return 'You win!';
+        
     } else {
         computerScore++;
         return 'Computer wins!';
